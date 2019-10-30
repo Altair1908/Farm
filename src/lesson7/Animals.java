@@ -1,12 +1,18 @@
 package lesson7;
 
 abstract public class Animals {
+    protected String name;
     protected int weight;
     protected int moveSpeed;
 
-    public Animals(int weight, int moveSpeed) {
-        this.weight = weight;
-        this.moveSpeed = moveSpeed;
+    public Animals(String name, int weight, int moveSpeed) {
+        setName(name);
+        setWeight(weight);
+        setMoveSpeed(moveSpeed);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setWeight(int weight) {
@@ -17,8 +23,9 @@ abstract public class Animals {
         this.moveSpeed = moveSpeed;
     }
 
-
-
+    public String getName() {
+        return name;
+    }
 
     public int getWeight() {
         return weight;

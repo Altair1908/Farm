@@ -1,21 +1,15 @@
 package lesson7;
 
 public class Home extends Animals{
-    protected String name;
-    protected int health;
-    protected int resource;
-    protected boolean eatable;
+    private int health;
+    private int resource;
+    private boolean eatable;
 
-    public Home(int weight, int moveSpeed, String name, int health, int resource, boolean eatable) {
-        super(weight, moveSpeed);
-        this.name = name;
-        this.health = health;
-        this.resource = resource;
-        this.eatable = eatable;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Home(String name, int weight, int moveSpeed, int health, int resource, boolean eatable) {
+        super(name, weight, moveSpeed);
+        setHealth(health);
+        setResource(resource);
+        setEatable(eatable);
     }
 
     public void setHealth(int health) {
@@ -30,10 +24,6 @@ public class Home extends Animals{
         this.eatable = eatable;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getHealth() {
         return health;
     }
@@ -45,4 +35,5 @@ public class Home extends Animals{
     public boolean isEatable() {
         return eatable;
     }
+
 }

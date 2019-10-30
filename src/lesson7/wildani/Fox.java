@@ -3,7 +3,7 @@ package lesson7.wildani;
 import lesson7.Wild;
 
 public class Fox extends Wild {
-    public Fox(int weight, int moveSpeed, int power) {
-        super(weight, moveSpeed, power);
+    public Fox(String name, int weight, int moveSpeed, int power) {
+        super(name, weight, moveSpeed, power);
     }
 }
