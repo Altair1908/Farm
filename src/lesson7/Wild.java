@@ -18,12 +18,11 @@ public class Wild extends Animals{
 
     public void attack(Home[] hAA,int hA, Farmer f, int[] uW, int uWI){
         if (f.shooWild() == false) {
+            //System.out.println(hA + " ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
             if (this.moveSpeed > hAA[hA].moveSpeed) {
                 hAA[hA].setHealth(hAA[hA].getHealth() - this.power);
                 if (hAA[hA].getHealth() <= 0){
                     System.out.println(this.name + " убил " + hAA[hA].name + ".");
-                    //Чтобы не возникло проблем с выбором нового домашнего животного для атаки, если кто-то погибнет, придётся переформировать существующий массив.....
-                    //Я сделал, что элементы после null просто смещаются на 1 ячейку влево, соот-но при рандоме нового животного диапазон рандома будет менбше на 1 (это в Main проверяется)
                     System.arraycopy(hAA, hA + 1, hAA, hA, hAA.length - (hA + 1));
                     hAA[hAA.length - 1] = null;
                 } else {

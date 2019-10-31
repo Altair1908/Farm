@@ -6,7 +6,7 @@ import lesson7.homeani.Rabbit;
 import lesson7.homeani.Cat;
 
 public class Farm {
-    public Home[] homeAnimals = new Home[10];
+    public Home[] homeAnimals = new Home[30];
     public Farmer farmer1 = new Farmer(100);
 
     public void setHomeAnimals(Home[] homeAnimals) {

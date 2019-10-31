@@ -40,26 +40,26 @@ public class Main {
             homeAniIden = (int) ((Math.random() * 4) + 1);
             switch (homeAniIden) {
                 case 1:
-                    newHomeAni = new Cow("Корова", 15, 10, 50, 0, true);
+                    newHomeAni = new Cow("Корова", 50, 10, 50, 3, true);
                     farm.homeAnimals[i] = newHomeAni;
                     break;
                 case 2:
-                    newHomeAni = new Chicken("Курица", 15, 20, 15, 0, true);
+                    newHomeAni = new Chicken("Курица", 10, 20, 15, 2, true);
                     farm.homeAnimals[i] = newHomeAni;
                     break;
                 case 3:
-                    newHomeAni = new Rabbit("Кролик", 15, 30, 15, 0, true);
+                    newHomeAni = new Rabbit("Кролик", 10, 30, 15, 0, true);
                     farm.homeAnimals[i] = newHomeAni;
                     break;
                 case 4:
-                    newHomeAni = new Cat("Кот", 15, 40, 10, 0, false);
+                    newHomeAni = new Cat("Кот", 7, 40, 10, 0, false);
                     farm.homeAnimals[i] = newHomeAni;
                     break;
             }
         }
         // Циклим дни фермы
         int newInd2 = forest.wildAnimals.length;
-        for (int y = 0; y < 15; y++) {
+        for (int y = 0; y < 200; y++) {
             System.out.println("День " + (y + 1));
             // Фермер расходует ресурс
             farm.farmer1.spendRes();
@@ -69,21 +69,21 @@ public class Main {
             }
             // Случайное дикое животное нападает на случайное домашнее животное
             // Проверка на появление null массива homeAnimals
-                int newInd = farm.homeAnimals.length;
+                int newInd = farm.homeAnimals.length - 1;
                 for (int i = 0; i < farm.homeAnimals.length; i++) {
                     if (farm.homeAnimals[i] == null) {
-                        newInd = i;
+                        newInd = i - 1;
                         break;
                     }
                 }
                 // Проверка на появление 3 массива wildAnimals
                 for (int t = 0; t < unluckyWild.length; t++) {
                     if (unluckyWild[t] == 3) {
-                        System.out.println("Один из хищников (" + forest.wildAnimals[t].name + ") больше не придёт!");
+                        System.out.println("Один из хищников (" + forest.wildAnimals[t].name + ") больше не прийдёт!");
                         System.arraycopy(unluckyWild, t + 1, unluckyWild, t, unluckyWild.length - (t + 1));
                         System.arraycopy(forest.wildAnimals, t + 1, forest.wildAnimals, t, forest.wildAnimals.length - (t + 1));
                         newInd2 = newInd2 - 1;
-                        System.out.println("Количество оставшихся хищников: " + newInd2+ ".");
+                        System.out.println("Количество оставшихся хищников: " + newInd2 + ".");
                         break;
                     }
                 }
@@ -101,9 +101,15 @@ public class Main {
                     }
                 }
             // Фермер кормит животных
-            farm.farmer1.feedHome(farm.homeAnimals, newInd);
+            for (int i = 0; i < farm.homeAnimals.length; i++) { // Определям заново newInd на случай, если дикое убьёт домашнее
+                if (farm.homeAnimals[i] == null) {
+                    newInd = i - 1;
+                    break;
+                }
+            }
+            farm.farmer1.feedHome(farm.homeAnimals, newInd + 1);
             // Фермер собирает ресурс и поплняет его
-            farm.farmer1.eatRes(farm.homeAnimals, newInd);
+            farm.farmer1.eatRes(farm.homeAnimals, newInd + 1);
             //System.out.println("ДЖ: \n" + farm.homeAnimals[0] + "\n" + farm.homeAnimals[1] + "\n" + farm.homeAnimals[2] + "\n" + farm.homeAnimals[3] + "\n" + farm.homeAnimals[4] + "\n" + farm.homeAnimals[5] + "\n" + farm.homeAnimals[6] + "\n" + farm.homeAnimals[7] + "\n" + farm.homeAnimals[8] + "\n" + farm.homeAnimals[9]);
         }
     }

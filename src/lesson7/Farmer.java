@@ -28,22 +28,22 @@ public class Farmer {
                 System.out.println("Фермер накопил ресурс.");
         } else { // В случае, если собранных за этот день ресов не хвататет, чтобы поесть, здесь мы смотрим остаток,
                 // который фермер отъедает от веса имеющихся животных пока не съест каждое следующее до конца
-            System.out.println("Фермеру не хватило ресов, смотрим животных....");
+            System.out.println("Фермеру не хватило ресов, смотрим животных...");
             resNotEn = 15 - resCount;
             int counter1 = 0;
-            System.out.println(allHome + " ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
+            //System.out.println(allHome + " " + resNotEn + " ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
             while (true) {
                 if (hAA[counter1].isEatable()) {
                     if (hAA[counter1].weight > resNotEn) {
                         hAA[counter1].weight = hAA[counter1].weight - resNotEn;
                         this.resFarmer = this.resFarmer + 15;
-                        System.out.println("Фермер отъел у " + hAA[counter1].name + " и у него осталось " + hAA[counter1].weight + " веса.");
+                        System.out.println("Фермер отъел у " + hAA[counter1].name + " и у него осталось " + hAA[counter1].weight + " кг веса.");
                         break;
                     } else if (hAA[counter1].weight == resNotEn) {
-                        System.arraycopy(hAA, 1 + counter1, hAA, counter1, allHome - 1);
+                        System.arraycopy(hAA, 1 + counter1, hAA, counter1, allHome - 1 - counter1);
                         this.resFarmer = this.resFarmer + 15;
                         hAA[allHome - 1] = null;
-                        System.out.println("ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
+                        //System.out.println("ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
                         allHome = allHome - 1;
                         if (allHome == 0) {
                             System.out.println("На ферме не осталось животных! Вы проиграли!");
@@ -51,17 +51,21 @@ public class Farmer {
                         break;
                     } else {
                         resNotEn = resNotEn - hAA[counter1].weight;
-                        System.arraycopy(hAA, 1 + counter1, hAA, counter1, allHome - 1);
+                        System.arraycopy(hAA, 1 + counter1, hAA, counter1, allHome - 1 - counter1);
                         hAA[allHome - 1] = null;
-                        System.out.println("ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
+                        //System.out.println("ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
                         allHome = allHome - 1;
-                        if (allHome == 0) {
+                        if ((allHome == 0) || (hAA[counter1] == null)) {
                             System.out.println("На ферме не осталось животных! Вы проиграли!");
                             break;
                         }
                     }
                 } else {
                     counter1 = counter1 + 1;
+                    if (hAA[counter1] == null) {
+                        System.out.println("На ферме не осталось съедобных животных! Вы проиграли!");
+                        break;
+                    }
                 }
             }
         }
