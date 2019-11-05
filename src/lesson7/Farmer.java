@@ -2,19 +2,14 @@ package lesson7;
 
 public class Farmer {
     private int resFarmer; //текущее кол-во ресурсов фермера
-
     public Farmer(int resFarmer) {
-        this.resFarmer = resFarmer;
-    }
-    public void setResFarmer(int resFarmer) {
         this.resFarmer = resFarmer;
     }
     public int getResFarmer() {
         return resFarmer;
     }
-
     public void spendRes(){ // Трата ресурса
-        this.resFarmer = this.resFarmer - 15;
+        this.resFarmer -= 15;
         System.out.println("Фермер израсходовал часть ресурсов.");
     }
     public void eatRes(Home[] hAA, int allHome){ // Накопление ресурса
@@ -24,26 +19,24 @@ public class Farmer {
             resCount = resCount + hAA[i].getResource();
         }
         if (resCount >= 15){ // То есть если ресурсов собрано больше, чем потребляет фермер (15), то он есть свою норму, а остальное выкидывает (допустим, что любит только свежее :) )
-                this.resFarmer = this.resFarmer + 15;
+                this.resFarmer += 15;
                 System.out.println("Фермер накопил ресурс.");
         } else { // В случае, если собранных за этот день ресов не хвататет, чтобы поесть, здесь мы смотрим остаток,
                 // который фермер отъедает от веса имеющихся животных пока не съест каждое следующее до конца
             System.out.println("Фермеру не хватило ресов, смотрим животных...");
             resNotEn = 15 - resCount;
             int counter1 = 0;
-            //System.out.println(allHome + " " + resNotEn + " ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
             while (true) {
                 if (hAA[counter1].isEatable()) {
                     if (hAA[counter1].weight > resNotEn) {
                         hAA[counter1].weight = hAA[counter1].weight - resNotEn;
-                        this.resFarmer = this.resFarmer + 15;
+                        this.resFarmer += 15;
                         System.out.println("Фермер отъел у " + hAA[counter1].name + " и у него осталось " + hAA[counter1].weight + " кг веса.");
                         break;
                     } else if (hAA[counter1].weight == resNotEn) {
                         System.arraycopy(hAA, 1 + counter1, hAA, counter1, allHome - 1 - counter1);
-                        this.resFarmer = this.resFarmer + 15;
+                        this.resFarmer += 15;
                         hAA[allHome - 1] = null;
-                        //System.out.println("ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
                         allHome = allHome - 1;
                         if (allHome == 0) {
                             System.out.println("На ферме не осталось животных! Вы проиграли!");
@@ -53,7 +46,6 @@ public class Farmer {
                         resNotEn = resNotEn - hAA[counter1].weight;
                         System.arraycopy(hAA, 1 + counter1, hAA, counter1, allHome - 1 - counter1);
                         hAA[allHome - 1] = null;
-                        //System.out.println("ДЖ: \n" + hAA[0] + "\n" + hAA[1] + "\n" + hAA[2] + "\n" + hAA[3] + "\n" + hAA[4] + "\n" + hAA[5] + "\n" + hAA[6] + "\n" + hAA[7] + "\n" + hAA[8] + "\n" + hAA[9]);
                         allHome = allHome - 1;
                         if ((allHome == 0) || (hAA[counter1] == null)) {
                             System.out.println("На ферме не осталось животных! Вы проиграли!");
@@ -103,12 +95,12 @@ public class Farmer {
         }
     }
     public boolean shooWild(){ // Прогнать дикое. Это делаю функцией с возвратом булевого значения (либо прогнал, либо не прогнал)
-        // Реализовываю таким образом потому что в дальнейшем можно регулировать вероятности меняя цифру 50
+        // Реализовываю таким образом потому что в дальнейшем можно регулировать вероятности меняя цифру 30
         boolean shooProb;
         int temp1;
         temp1 = (int) (Math.random() * 100);
         //System.out.println("Цифра рандома для шанс прогнать дикое животное: " + temp1 + ".");
-        if (temp1 < 50) {
+        if (temp1 < 30) {
             shooProb = true;
             System.out.println("Фермер прогнал хищника!");
         }
